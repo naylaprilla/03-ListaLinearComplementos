@@ -134,7 +134,7 @@ void excluirElemento()
 		for (int i = pos; i < nElementos - 1; i++) {
 				lista[i] = lista[i + 1]; //mover todos os elementos uma posição para baixo
 		}
-		nElementos--;
+		nElementos--;//exclui a ultima posição da lista
 	}
 	else
 	{
