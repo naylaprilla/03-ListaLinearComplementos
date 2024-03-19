@@ -10,11 +10,11 @@ void exibirElementos();
 void inserirElemento();
 void excluirElemento();
 void buscarElemento();
-int posicaoElemento(int valor);
+int posicaoElemento(int valor);  //não é uma variavel vazia - passa alguma coisa e devolve alguma coisa
 //--------------------------
 
-
-const int MAX = 10;;
+//variáveis de escopo global
+const int MAX = 10;
 int lista[MAX]{};
 int nElementos = 0;
 
@@ -24,7 +24,7 @@ int main()
 	menu();
 }
 
-void menu()
+void menu() //serve para mostrar as opções de funções dentro do programa 
 {
 	int op = 0;
 	while (op != 7) {
@@ -56,7 +56,6 @@ void menu()
 			break;
 		case 6: excluirElemento();
 			break;
-
 		case 7:
 			return;
 		default:
@@ -80,7 +79,7 @@ void exibirQuantidadeElementos() {
 
 }
 
-void exibirElementos()
+void exibirElementos() 
 {
 	if (nElementos == 0)
 	{
@@ -94,7 +93,7 @@ void exibirElementos()
 	}
 }
 
-void inserirElemento()
+void inserirElemento() //adiciona uma elemento à lista
 {
 	int pos;
 	int valor;
@@ -122,11 +121,32 @@ void inserirElemento()
 
 void excluirElemento()
 {
+	int elemento;
 
+//pedir um numero
+	cout << "Digite o elemento que sera excluido: " << endl;
+	cin >> elemento;
+//o elemento está em que posição da lista
 
+	int pos = posicaoElemento(elemento);
+
+	if (pos != -1) {
+		for (int i = pos; i < nElementos - 1; i++) {
+				lista[i] = lista[i + 1]; //mover todos os elementos uma posição para baixo
+		}
+		nElementos--;
+	}
+	else
+	{
+		cout << "O elemento digitado nao foi encontrado na lista" << endl;
+	}
+	
 }
 
-void buscarElemento()
+
+	
+
+void buscarElemento() // verifica em qual posição o elemento está na lista
 {
 	int valor;
 	cout << "Digite o elemento que queira buscar: ";
@@ -142,12 +162,13 @@ void buscarElemento()
 	}
 }
 
-int posicaoElemento(int busca)
+int posicaoElemento(int busca) //verifica em que posição se encontra um elemento na lista
 {
 	int posicao = -1;
 	for (int i = 0; i < nElementos; i++) {
 		if (busca == lista[i]) {
 			posicao = i;
+			break;
 		}
 	}
 	return posicao;
